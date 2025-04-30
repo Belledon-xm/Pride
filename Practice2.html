@@ -137,41 +137,99 @@
                             Events
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="#">Parade</a></li>
+                            <li><a class="dropdown-item" href="#">Gathering</a></li>
+                            <li><a class="dropdown-item" href="#">Festival</a></li>
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex me-3" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
                 </form>
+                <!-- Sign In and Sign Up Buttons -->
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</button>
+                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</button>
+                </div>
             </div>
         </div>
     </nav>
 
+    <!-- Sign In Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="signInEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signInEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signInPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signInPassword" placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="signUpName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="signUpName" placeholder="Enter your full name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signUpEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signUpPassword" placeholder="Create a password">
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="data:image/png;base64,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" class="d-block w-100" alt="Pride Celebration Image 1" loading="lazy">
+            <img src="https://www.rappler.com/tachyon/2023/06/asia-pride-protest-june-26-2023.jpg" class="d-block w-100" alt="Pride Celebration Image 1" loading="lazy">
             <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
                 <h1>Welcome To Pride</h1>
                 <p>Join us in promoting a world where everyone is safe and free to express who they are. Let’s connect with communities, and celebrate gender inclusivity</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7ukazpaWyVikhb8u7IDINwSpqHEv_8D0fbw&s" class="d-block w-100" alt="Pride Celebration Image 2" loading="lazy">
+            <img src="https://cst.brightspotcdn.com/dims4/default/3ba43f4/2147483647/strip/true/crop/3000x1713+0+144/resize/1461x834!/quality/90/?url=https%3A%2F%2Fcdn.vox-cdn.com%2Fthumbor%2FajijGhm3U1ORGVFc9RcAPCcMpX8%3D%2F0x0%3A3000x2000%2F3000x2000%2Ffilters%3Afocal%281500x1000%3A1501x1001%29%2Fcdn.vox-cdn.com%2Fuploads%2Fchorus_asset%2Ffile%2F24751788%2Fmerlin_114274172.jpg" class="d-block w-100" alt="Pride Celebration Image 2" loading="lazy">
             <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
                 <h1>Unity in Action</h1>
                 <p>Experience the power of unity and love.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVFuO_2G25fEFj9npwsvQ9bS6lG-OiMChInQ&s" class="d-block w-100" alt="Pride Celebration Image 3" loading="lazy">
+            <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/rockcms/2023-06/230625-pride-parade-nyc-jm-1408-b45d16.jpg" class="d-block w-100" alt="Pride Celebration Image 3" loading="lazy">
             <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
                 <h1>Embracing Equality</h1>
                 <p>Stand with us for equality and justice.</p>
