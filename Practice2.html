@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <title>Pride</title>
+    <title>Pride Celebration</title>
     <style>
         /* Navbar Styling */
         .navbar {
-            background: linear-gradient(90deg, #ff6ec4, #7873f5);
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            animation: rainbowMove 6s linear infinite;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .navbar-brand img {
             border-radius: 5px;
@@ -20,9 +23,25 @@
         .nav-link {
             color: white !important;
             font-weight: bold;
+            transition: color 0.3s ease-in-out;
         }
         .nav-link:hover {
             color: #ff6ec4 !important;
+        }
+
+        /* Hero Section with Rainbow Transition */
+        .hero-section {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            animation: rainbowMove 6s linear infinite;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         /* Carousel Styling */
@@ -32,7 +51,7 @@
             object-fit: cover;
         }
         .carousel-caption {
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
         }
@@ -51,11 +70,11 @@
         section {
             padding: 60px 0;
         }
-        .bg-secondary {
-            background-color: #6c757d !important;
-        }
         .bg-light {
             background-color: #f8f9fa !important;
+        }
+        .bg-secondary {
+            background-color: #6c757d !important;
         }
         .text-light {
             color: #ffffff !important;
@@ -71,29 +90,59 @@
             padding: 20px 0;
             text-align: center;
         }
-
-        /* Button Styling */
-        .btn-outline-success {
+        footer a {
             color: white;
-            border-color: white;
+            margin: 0 10px;
         }
-        .btn-outline-success:hover {
-            background-color: white;
-            color: #7873f5;
+        footer a:hover {
+            color: #ff6ec4;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .carousel-caption h1 {
-                font-size: 2rem;
+        /* Back-to-Top Button */
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        #backToTop:hover {
+            transform: scale(1.1);
+        }
+
+        /* Rainbow Animation */
+        @keyframes rainbowMove {
+            0% {
+                background-position: 0% 50%;
             }
-            .carousel-caption p {
-                font-size: 1rem;
+            100% {
+                background-position: 100% 50%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Welcome to Pride</h1>
+            <p>Celebrate love, equality, and inclusivity with us.</p>
+        </div>
+    </section>
+
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -108,7 +157,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.nbcnews.com/nbc-out">News</a>
+                        <a class="nav-link" href="news.html">News</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -143,16 +192,21 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex me-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">
+                <form class="d-flex me-3 position-relative" role="search" id="searchForm">
+                    <input class="form-control me-2 rounded-pill shadow-sm" type="search" placeholder="Search for events, topics, or members..." aria-label="Search" id="searchInput" style="padding: 10px 20px;">
+                    <button class="btn btn-outline-success rounded-pill shadow-sm" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
+                    <!-- Dropdown for Search Results -->
+                    <div class="dropdown-menu w-100 mt-2" id="searchDropdown" style="display: none;"></div>
                 </form>
+
+                <!-- Search Results Section -->
+                <div id="searchResults" class="mt-3"></div>
                 <!-- Sign In and Sign Up Buttons -->
                 <div class="d-flex">
-                    <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</button>
-                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</button>
+                    <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="modal" data-bs-target="#signInModal" id="signInButton">Sign In</button>
+                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#signUpModal" id="signUpButton">Sign Up</button>
                 </div>
             </div>
         </div>
@@ -167,7 +221,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="signInForm">
                         <div class="mb-3">
                             <label for="signInEmail" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="signInEmail" placeholder="Enter your email">
@@ -175,6 +229,10 @@
                         <div class="mb-3">
                             <label for="signInPassword" class="form-label">Password</label>
                             <input type="password" class="form-control" id="signInPassword" placeholder="Enter your password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="signInName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="signInName" placeholder="Enter your full name">
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Sign In</button>
                     </form>
@@ -192,7 +250,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="signUpForm">
                         <div class="mb-3">
                             <label for="signUpName" class="form-label">Full Name</label>
                             <input type="text" class="form-control" id="signUpName" placeholder="Enter your full name">
@@ -254,73 +312,128 @@
     </div>
 </section>
 
-<section class="py-5 bg-secondary text-light text-start">
+<!-- Video Section -->
+<section class="py-5 bg-dark text-light text-center">
     <div class="container">
-        <h2 class="mb-4 text-center">About Pride</h2>
-        <p class="mb-4">
-            Pride is a powerful feeling that stems from a deep sense of self-worth, accomplishment, and belonging. It can arise from personal achievements, the overcoming of challenges, or the recognition of one’s identity and values.
+        <div class="ratio ratio-16x9">
+            <video controls>
+                <source src="https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/H2qwMhbkqkzg2flz4/videoblocks-64d9fbebe6e399173c5c819b_hejji9ga2__af4ca2f9c614c23880845856fa5b6f06__P360.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+</section>
+<!-- About Pride Section (Red) -->
+<section class="py-5" style="background-color: red; color: white;">
+    <div class="container text-center">
+        <h2 class="mb-4 display-5 fw-bold">About Pride</h2>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Pride Month is a month-long celebration that recognizes the LGBTQ+ community and their contributions to society. It is a time to acknowledge the challenges faced by this community and to stand in solidarity with their fight for equality, acceptance, and human rights. Pride Month is a joyful and colorful display of love, unity, and resilience, with events and activities that promote inclusivity, educate the public, and celebrate the diversity of sexual orientations and gender identities.
         </p>
     </div>
 </section>
 
-<section>
-    <div class="container py-5">
+
+<section class="py-5" style="background-color: orange; color: white;">
+    <div class="container">
+        <h2 class="mb-4 display-5 fw-bold text-center">Brief History of Pride</h2>
         <div class="row align-items-center">
             <div class="col-md-6">
-                <h2 class="mb-4">Brief History of Pride</h2>
-                <p class="lead mb-4">Pride has its roots in the fight for LGBTQ+ rights, especially in response to discrimination and injustice. One key moment was the Stonewall Uprising in June 1969, when LGBTQ+ people, led largely by trans women of color like Marsha P. Johnson and Sylvia Rivera, resisted a police raid at the Stonewall Inn in New York City. This sparked a wave of activism and the birth of the modern Pride movement. The first Pride marches were held in 1970 to commemorate Stonewall and have since grown into worldwide celebrations of love, identity, and equality, while also continuing the push for civil rights and acceptance.</p>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLsQlU9YmvOk_DTLVzJvYkaO4OMF6-Bb0vtw&s" class="img-fluid rounded shadow mb-3" alt="Pride History Image 1">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKx-bqftAfERISqs71U2u-9FygcPbU5cOdLg&s" class="img-fluid rounded shadow mb-3" alt="Pride History Image 2">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxGvP3YDbdOJLOsNKQQbie0erpaZEArv2ffg&s" class="img-fluid rounded shadow mb-3" alt="Pride History Image 3">
             </div>
-            <div class="col-md-6 text-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlbU9ZVCsvHnYlReoQlMGmsGRhz6mvRy7fWg&s" class="img-fluid rounded" alt="Join Us Image">
+            <div class="col-md-6">
+                <p class="lead mb-4" style="line-height: 1.8;">
+                    Pride Month has its roots in the Stonewall Uprising, which occurred in New York City in June 1969. The uprising was a turning point in the LGBTQ+ rights movement, sparked by a series of protests against police harassment and discrimination. The following year, the first Pride marches were organized to commemorate the anniversary of the uprising.
+                </p>
+                <p class="lead mb-4" style="line-height: 1.8;">
+                    In the United Kingdom, the first official Pride march took place in London in 1972. Since then, Pride Month has grown in significance, with cities across the UK hosting vibrant parades, events, and educational programs throughout June. It serves
+                </p>
+                <p class="lead mb-4" style="line-height: 1.8;">
+                    as a platform for LGBTQ+ individuals and allies to celebrate diversity, raise awareness about LGBTQ+ rights, and foster a sense of community and acceptance.
+                </p>
+                <p class="lead mb-4" style="line-height: 1.8;">
+                    Over the years, Pride Month has expanded to encompass a wide range of activities, including art exhibitions, panel discussions, film screenings, and concerts. These events provide spaces for LGBTQ+ individuals to express themselves freely, share their stories, and create visibility for their experiences.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-light text-start">
+
+<section class="py-5" style="background-color: yellow; color: black;">
     <div class="container">
+        <h2 class="mb-4 display-5 fw-bold text-center">Pride in Action</h2>
         <div class="row">
-            <div class="col-md-4">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ZsAuXMF-WBaKg1iyvZ0WjGYrDFTfNgevvg&s" class="img-fluid rounded" alt="Image 1">
+            <div class="col-md-4 text-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_ZsAuXMF-WBaKg1iyvZ0WjGYrDFTfNgevvg&s" class="img-fluid rounded shadow mb-3" alt="Pride Event 1">
+                <p class="lead">Celebrating Diversity</p>
             </div>
-            <div class="col-md-4">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKQm1S3FL-Uv2A3IPHyc2F4hNH7C359Ws5nQ&s" class="img-fluid rounded" alt="Image 2">
+            <div class="col-md-4 text-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKQm1S3FL-Uv2A3IPHyc2F4hNH7C359Ws5nQ&s" class="img-fluid rounded shadow mb-3" alt="Pride Event 2">
+                <p class="lead">Unity in Action</p>
             </div>
-            <div class="col-md-4">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGojj1eW-5p3iobPw4nfIbGbomiQu0bRYizw&s" class="img-fluid rounded" alt="Image 3">
+            <div class="col-md-4 text-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGojj1eW-5p3iobPw4nfIbGbomiQu0bRYizw&s" class="img-fluid rounded shadow mb-3" alt="Pride Event 3">
+                <p class="lead">Love and Acceptance</p>
             </div>
         </div>
     </div>
 </section>
 
 
-
-<section class="py-5 bg-secondary text-light text-start">
-    <div class="container py-5 text-center">
-        <h2 class="mb-4">When and Where is Pride Month</h2>
-        <p class="lead mb-4">Pride Month is traditionally celebrated in June around the world, including in the United Kingdom. In 2025, Pride Month will take place from June 1st to June 30th. This extended period allows for a wide range of events, parades, marches, and discussions to take place, providing opportunities for LGBTQ+ individuals and their allies to come together and make their voices heard.</p>
-        <p class="lead mb-4">Titled LOV3LABAN 2025, the event is happening on June 28, Saturday. The venue was not officially announced, but Pride PH tagged Quezon Memorial Circle in their Instagram post.
-        </p> 
-    </div>
-</section>
-
-<section class="py-5 bg-light text-start">
-    <div class="container">
-        <h2 class="mb-4 text-center">The Importance of Celebrating LGBTQIA+</h2>
-        <p class="lead">
-            Celebrating LGBTQIA+ communities is important because it honors the diversity, strength, and resilience of people whose identities have often been marginalized or misunderstood. It creates spaces where individuals can feel seen, valued, and affirmed for who they are. Celebrations like Pride raise awareness, challenge stereotypes, and promote acceptance and equality. They also remind society of the ongoing struggles against discrimination and the work still needed to achieve full rights and inclusion. Most of all, celebrating LGBTQIA+ lives sends a powerful message that everyone deserves to live openly, love freely, and be proud of who they are.
+<section class="py-5" style="background-color: green; color: black;">
+    <div class="container text-center">
+        <h2 class="mb-4 display-5 fw-bold">When and Where is Pride Month</h2>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Pride Month is traditionally celebrated in June around the world, including in the United Kingdom. In 2025, Pride Month will take place from June 1st to June 30th. This extended period allows for a wide range of events, parades, marches, and discussions to take place, providing opportunities for LGBTQ+ individuals and their allies to come together and make their voices heard.
+        </p>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Titled <strong>LOV3LABAN 2025</strong>, the event is happening on <strong>June 28, Saturday</strong>. The venue was not officially announced, but Pride PH tagged Quezon Memorial Circle in their Instagram post.
         </p>
     </div>
 </section>
 
-<section class="py-5 bg-secondary text-light text-start">
-    <div class="container">
-        <h2 class="mb-4 text-center">Pride Organization Internationally</h2>
-        <p class="mb-4">
-            Many Pride organizations around the world work to support, celebrate, and advocate for the LGBTQIA+ community. Some of the most well-known include InterPride, an international network that connects Pride organizers globally and supports events in different countries. EuroPride is another major organization that hosts a pan-European Pride event each year in a different city. In Canada, there's Fierté Canada Pride, and in the United States, groups like NYC Pride and San Francisco Pride organize some of the largest celebrations. Across Asia, Taiwan Pride has become one of the biggest LGBTQIA+ events in the region. Each organization not only hosts parades and festivals but also plays a crucial role in education, advocacy, and creating safe spaces for LGBTQIA+ individuals worldwide.
+<!-- The Importance of Celebrating LGBTQIA+ Section (Green) -->
+<section class="py-5" style="background-color: blue; color: white;">
+    <div class="container text-center">
+        <h2 class="mb-4 display-5 fw-bold">The Importance of Celebrating LGBTQIA+</h2>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Celebrating Pride Month provides vital visibility for the LGBTQIA+ community and fosters acceptance. It creates a powerful sense of community and belonging, while also educating the public on the challenges LGBTQIA+ individuals still face today, including discrimination, health disparities, and violence.
+        </p>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Pride Month also serves as a powerful political statement, pushing for equality, legal protection, and policy change. Importantly, it honors the sacrifices and achievements of those who fought before us and those who continue to fight today.
         </p>
     </div>
 </section>
+
+<!-- Pride Organization Internationally Section (Blue) -->
+<section class="py-5" style="background-color: indigo; color: white;">
+    <div class="container text-center">
+        <h2 class="mb-4 display-5 fw-bold">Pride Organization Internationally</h2>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Several organizations play critical roles in promoting LGBTQIA+ rights around the world. ILGA World is a global federation advocating for LGBTQIA+ rights in over 150 countries. Stonewall UK works toward equality and empowerment for LGBTQIA+ people across Britain and internationally.
+        </p>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            OutRight Action International champions LGBTQIA+ human rights through direct advocacy at the United Nations and on the ground in various countries. InterPride is the international association that supports and connects Pride organizations worldwide.
+        </p>
+    </div>
+</section>
+
+
+<section class="py-5" style="background: violet; color: white;">
+    <div class="container text-center">
+        <h2 class="mb-4 display-5 fw-bold">The Importance of Celebrating LGBTQIA+</h2>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Celebrating Pride Month provides vital visibility for the LGBTQIA+ community and fosters acceptance. It creates a powerful sense of community and belonging, while also educating the public on the challenges LGBTQIA+ individuals still face today, including discrimination, health disparities, and violence.
+        </p>
+        <p class="lead mb-4" style="line-height: 1.8;">
+            Pride Month also serves as a powerful political statement, pushing for equality, legal protection, and policy change. Importantly, it honors the sacrifices and achievements of those who fought before us and those who continue to fight today.
+        </p>
+    </div>
+</section>
+
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -376,7 +489,7 @@
           <li>You will not use this website for any unlawful activities.</li>
           <li>All content is for informational purposes only.</li>
         </ul>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">For More Information Click Here</a>
+        <p>For More Information<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Click Here</a></p>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="acceptTermsCheckbox">
           <label class="form-check-label" for="acceptTermsCheckbox">
@@ -412,8 +525,108 @@
   });
 </script>
 
+<script>
+    // Sample dataset for search (you can replace this with your actual data)
+    const data = [
+        "Pride Parade 2025",
+        "Unity in Action",
+        "Embracing Equality",
+        "Stonewall Uprising",
+        "LGBTQ+ Rights",
+        "Gender Inclusivity",
+        "Pride Month Events",
+        "Equality and Justice",
+        "Celebrating Diversity",
+        "Love and Acceptance"
+    ];
+
+    // Handle search functionality
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent form submission
+
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const dropdown = document.getElementById('searchDropdown');
+        dropdown.innerHTML = ''; // Clear previous results
+
+        const results = data.filter(item => item.toLowerCase().includes(query));
+
+        if (results.length > 0) {
+            results.forEach(result => {
+                const resultItem = document.createElement('a');
+                resultItem.href = "#"; // Add a link if needed
+                resultItem.className = 'dropdown-item';
+                resultItem.textContent = result;
+                dropdown.appendChild(resultItem);
+            });
+            dropdown.style.display = 'block'; // Show the dropdown
+        } else {
+            dropdown.innerHTML = '<span class="dropdown-item text-danger">No results found.</span>';
+            dropdown.style.display = 'block'; // Show the dropdown
+        }
+    });
+
+    // Hide the dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('searchDropdown');
+        if (!document.getElementById('searchForm').contains(e.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+</script>
+
+<!-- Back-to-Top Button -->
+<button id="backToTop" class="btn btn-primary">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+<script>
+    // Back-to-Top Button Functionality
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+            backToTop.style.display = 'block';
+        } else {
+            backToTop.style.display = 'none';
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+<script>
+    // Handle Sign In Form Submission
+    document.getElementById('signInForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const fullName = document.getElementById('signInName').value;
+        if (fullName) {
+            document.getElementById('signInButton').textContent = fullName;
+            document.getElementById('signUpButton').style.display = 'none';
+            bootstrap.Modal.getInstance(document.getElementById('signInModal')).hide();
+        }
+    });
+
+    // Handle Sign Up Form Submission
+    document.getElementById('signUpForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const fullName = document.getElementById('signUpName').value;
+        if (fullName) {
+            document.getElementById('signUpButton').textContent = fullName;
+            document.getElementById('signInButton').style.display = 'none';
+            bootstrap.Modal.getInstance(document.getElementById('signUpModal')).hide();
+        }
+    });
+</script>
+
 <footer>
     <p>&copy; 2025 Pride Organization. All rights reserved.</p>
+    <div>
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-twitter"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-youtube"></i></a>
+    </div>
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>

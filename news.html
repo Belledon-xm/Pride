@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <title>Pride News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        #header, #footer {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #navbar {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            animation: rainbowMove 6s linear infinite;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #navbar a {
+            color: white !important;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease-in-out;
+        }
+        #navbar a:hover {
+            color: #ff6ec4 !important;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        article {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        article h2 {
+            color: #ff6ec4;
+        }
+        article p {
+            color: #555;
+        }
+        article a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        article a:hover {
+            text-decoration: underline;
+        }
+        @keyframes rainbowMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">
+        <h1>Pride News</h1>
+        <p>Stay updated with the latest news and events related to Pride.</p>
+    </div>
+
+    <!-- Return to Home Button -->
+    <div class="text-center my-4">
+        <a href="Practice2.html" class="btn btn-primary btn-lg">
+            Return to Home
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <h1 class="text-center">Latest News on Pride</h1>
+        <section id="news-articles" class="row">
+            <article class="col-md-4">
+                <img src="https://www.gaytravel4u.com/wp-content/uploads/2024/02/Pride-PH-Quezon-City-Manilla-Pride-Festival-2.jpg" alt="Pride Event 1" class="img-fluid rounded mb-3">
+                <h2>Pride PH Quezon City Manila Pride Festival 2025</h2>
+                <p>The Event. Next Edition: Saturday 28th June, 2025 – With the theme of “Lov3laban 2025”. Quezon City Pride Festival hosts one of the largest pride events in Southeast Asia.</p>
+                <a href="https://www.gmanetwork.com/lifestyle/news/121406/lov3laban-2025-pride-event-is-happening-on-june-28/story" target="_blank">Read more</a>
+            </article>
+            <article class="col-md-4">
+                <img src="https://images.gmanews.tv/webpics/2025/04/love-laban_2025_04_02_08_36_21.jpg" alt="Pride Event 2" class="img-fluid rounded mb-3">
+                <h2>Pride PH announces Pride March 2025 set for June 28</h2>
+                <p>STitled LOV3LABAN 2025, the event is happening on June 28, Saturday. The venue was not officially announced, but Pride PH tagged Quezon Memorial Circle in their Instagram post.</p>
+                <a href="https://www.gmanetwork.com/news/lifestyle/content/941328/pride-ph-announces-pride-march-2025-set-for-june-28/story/">Read more</a>
+            </article>
+            <article class="col-md-4">
+                <img src="https://cdn.marvel.com/content/1x/runawy2025001_hetrick_pride.jpg" alt="Pride Event 3" class="img-fluid rounded mb-3">
+                <h2>Marvel Pride 2025 Variant Covers Revealed</h2>
+                <p>Marvel Comics’ Pride celebration returns this June with six all-new PRIDE VARIANT COVERS drawn by superstar cover artist Meghan Hetrick!</p>
+                <a href="https://www.marvel.com/articles/comics/marvel-pride-2025-variant-covers-revealed">Read more</a>
+            </article>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer">
+        <p>&copy; 2025 Pride News. All rights reserved.</p>
+        <div>
+            <a href="#" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white mx-2"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white mx-2"><i class="bi bi-youtube"></i></a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>
