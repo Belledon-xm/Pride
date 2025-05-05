@@ -528,32 +528,13 @@
   </div>
   
   <script>
-    // Show the detailed terms modal
-    document.getElementById('viewDetailedTerms').addEventListener('click', function () {
-      var termsModal = bootstrap.Modal.getInstance(document.getElementById('termsModal'));
-      termsModal.hide();
-      var detailedTermsModal = new bootstrap.Modal(document.getElementById('detailedTermsModal'));
-      detailedTermsModal.show();
-    });
-  
-    // Go back to the original terms modal
-    document.getElementById('backToOriginalTerms').addEventListener('click', function () {
-      var detailedTermsModal = bootstrap.Modal.getInstance(document.getElementById('detailedTermsModal'));
-      detailedTermsModal.hide();
-      var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
-      termsModal.show();
-    });
-  
-    // Enable the "Proceed" button only when the checkbox is checked
-    document.getElementById('acceptTermsCheckbox').addEventListener('change', function () {
-      document.getElementById('proceedButton').disabled = !this.checked;
-    });
-  </script>
-  <script>
     // Automatically show the Terms and Conditions modal on page load
     window.addEventListener('load', function () {
-      var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
-      termsModal.show();
+      // Check if the user has already accepted the terms in this session
+      if (!sessionStorage.getItem('termsAccepted')) {
+        var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+        termsModal.show();
+      }
     });
   
     // Show the detailed terms modal
@@ -576,8 +557,17 @@
     document.getElementById('acceptTermsCheckbox').addEventListener('change', function () {
       document.getElementById('proceedButton').disabled = !this.checked;
     });
-  </script>
   
+    // Handle the "Proceed" button click
+    document.getElementById('proceedButton').addEventListener('click', function () {
+      // Store a flag in sessionStorage to indicate the terms have been accepted
+      sessionStorage.setItem('termsAccepted', 'true');
+  
+      // Hide the modal
+      var termsModal = bootstrap.Modal.getInstance(document.getElementById('termsModal'));
+      termsModal.hide();
+    });
+  </script> 
 <script>
     // Sample dataset for search (you can replace this with your actual data)
     const data = [
