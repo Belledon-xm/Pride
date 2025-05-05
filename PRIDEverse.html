@@ -461,59 +461,123 @@
   </div>
  
 
-<!-- Modal Structure -->
+<!-- Original Terms and Conditions Modal -->
 <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          By using this website, you agree to the following terms and conditions. Please read them carefully before proceeding.
-        </p>
-        <ul>
-          <li>You agree to respect the rights and dignity of all individuals.</li>
-          <li>You will not use this website for any unlawful activities.</li>
-          <li>All content is for informational purposes only.</li>
-        </ul>
-        <p>For More Information<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Click Here</a></p>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="acceptTermsCheckbox">
-          <label class="form-check-label" for="acceptTermsCheckbox">
-            I accept the terms and conditions.
-          </label>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="proceedButton" disabled>Proceed</button>
+        <div class="modal-body">
+          <p>
+            By using this website, you agree to the following terms and conditions. Please read them carefully before proceeding.
+          </p>
+          <ul>
+            <li>You agree to respect the rights and dignity of all individuals.</li>
+            <li>You will not use this website for any unlawful activities.</li>
+            <li>All content is for informational purposes only.</li>
+          </ul>
+          <p>
+            For more detailed terms and conditions, <button class="btn btn-link p-0" id="viewDetailedTerms">click here</button>.
+          </p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="acceptTermsCheckbox">
+            <label class="form-check-label" for="acceptTermsCheckbox">
+              I accept the terms and conditions.
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="proceedButton" disabled>Proceed</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<script>
-  // Show the modal automatically when the page loads
-  window.addEventListener('load', function () {
-    var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
-    termsModal.show();
-
-    // Add event listener to the "Proceed" button
-    document.getElementById('proceedButton').addEventListener('click', function () {
-      if (!this.disabled) {
-        termsModal.hide(); // Close the modal
-      }
+  
+  <!-- Detailed Terms and Conditions Modal -->
+  <div class="modal fade" id="detailedTermsModal" tabindex="-1" aria-labelledby="detailedTermsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailedTermsModalLabel">Detailed Terms and Conditions</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6>1. Respect and Dignity</h6>
+          <p>
+            Users must respect the rights, dignity, and privacy of all individuals. Harassment, hate speech, and discriminatory behavior are strictly prohibited.
+          </p>
+          <h6>2. Prohibited Activities</h6>
+          <p>
+            Users are not allowed to use this website for any unlawful or malicious activities, including but not limited to hacking, spreading malware, or violating intellectual property rights.
+          </p>
+          <h6>3. Content Disclaimer</h6>
+          <p>
+            All content provided on this website is for informational purposes only. The website owners are not responsible for any inaccuracies or damages resulting from the use of the content.
+          </p>
+          <h6>4. Privacy Policy</h6>
+          <p>
+            Your personal information will be handled in accordance with our privacy policy. Please review the privacy policy for more details.
+          </p>
+          <button class="btn btn-primary" id="backToOriginalTerms">Back to Original Terms</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Show the detailed terms modal
+    document.getElementById('viewDetailedTerms').addEventListener('click', function () {
+      var termsModal = bootstrap.Modal.getInstance(document.getElementById('termsModal'));
+      termsModal.hide();
+      var detailedTermsModal = new bootstrap.Modal(document.getElementById('detailedTermsModal'));
+      detailedTermsModal.show();
     });
-  });
-
-  // Enable the "Proceed" button only when the checkbox is checked
-  document.getElementById('acceptTermsCheckbox').addEventListener('change', function () {
-    document.getElementById('proceedButton').disabled = !this.checked;
-  });
-</script>
-
+  
+    // Go back to the original terms modal
+    document.getElementById('backToOriginalTerms').addEventListener('click', function () {
+      var detailedTermsModal = bootstrap.Modal.getInstance(document.getElementById('detailedTermsModal'));
+      detailedTermsModal.hide();
+      var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+      termsModal.show();
+    });
+  
+    // Enable the "Proceed" button only when the checkbox is checked
+    document.getElementById('acceptTermsCheckbox').addEventListener('change', function () {
+      document.getElementById('proceedButton').disabled = !this.checked;
+    });
+  </script>
+  <script>
+    // Automatically show the Terms and Conditions modal on page load
+    window.addEventListener('load', function () {
+      var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+      termsModal.show();
+    });
+  
+    // Show the detailed terms modal
+    document.getElementById('viewDetailedTerms').addEventListener('click', function () {
+      var termsModal = bootstrap.Modal.getInstance(document.getElementById('termsModal'));
+      termsModal.hide();
+      var detailedTermsModal = new bootstrap.Modal(document.getElementById('detailedTermsModal'));
+      detailedTermsModal.show();
+    });
+  
+    // Go back to the original terms modal
+    document.getElementById('backToOriginalTerms').addEventListener('click', function () {
+      var detailedTermsModal = bootstrap.Modal.getInstance(document.getElementById('detailedTermsModal'));
+      detailedTermsModal.hide();
+      var termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+      termsModal.show();
+    });
+  
+    // Enable the "Proceed" button only when the checkbox is checked
+    document.getElementById('acceptTermsCheckbox').addEventListener('change', function () {
+      document.getElementById('proceedButton').disabled = !this.checked;
+    });
+  </script>
+  
 <script>
     // Sample dataset for search (you can replace this with your actual data)
     const data = [
